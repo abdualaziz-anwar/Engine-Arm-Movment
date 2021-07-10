@@ -2,7 +2,7 @@
     $dbServerName = "localhost";
     $dbUsername = "root";
     $dbPassword = "";
-    $dbName = "engine-movment";
+    $dbName = "robottable";
 
     $conn = mysqli_connect($dbServerName, $dbUsername, $dbPassword, $dbName);
 
@@ -15,39 +15,41 @@
  <html>
  <!-- --------------------------------------------- -->
  <head>
-  <title>Test</title>
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+ 	<title>Test</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
  </head>
  <!-- --------------------------------------------- -->
  
  <body>
 
- <?php
-    if(in_array( "Up", $_POST)) {
-        $status = '1';
-    } else if (in_array("right",$_POST)) {
-        $status = '2';
-    } else if (in_array("Stop",$_POST)) {
-        $status = '0';
-    } else if (in_array("down",$_POST)) {
-        $status = '3';
-    } else if (in_array("Left",$_POST)) {
-        $status = '4';
-    }else{
-        $status='9';
-    }
-    $query = "insert into engine-movment(status)values({$status})";
-    $result = mysqli_query( $conn, $query );
-    if ( $result ) {
-        echo "Data added sucessfully";
-    } else {
-        die( "Data could not added to the database".mysqli_connect_error() );
-    }
-    ?>
-    </div>
-</body>
-</html>
+ 	<?php
+ 	$eng1=$_POST["eng1"];
+ 	$eng2=$_POST["eng2"];
+ 	$eng3=$_POST["eng3"];
+ 	$eng4=$_POST["eng4"];
+ 	$eng5=$_POST["eng5"];
 
-<?php
-mysqli_close( $conn );
+  if ( in_array( "Save", $_POST ) ) {
+    $Status = 0;
+  } else if ( in_array( "Play", $_POST ) ) {
+    $Status = 1;
+  }
+ 	$query="insert into robottable(eng1,eng2,eng3,eng4,eng5,Status)values({$eng1},{$eng2},{$eng3},{$eng4},{$eng5},{$Status})";
+    $result=mysqli_query($conn,$query);
+
+     if ($result){
+       echo "Data added sucessfully.";
+
+   }else{
+       die("Can Not conenct to the database".mysqli_connect_error($conn));
+   }
+
+ 	?>
+  <a href="../MainPage.html">GetBack</a>
+
+ </body>
+ </html>
+
+ <?php
+mysqli_close($conn);
 ?>
