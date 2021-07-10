@@ -45,12 +45,11 @@
    }
 
  	?>
-  <a href="robot.html">Get Back</a>
-
+  <a href="../MainPage.html">GetBack</a>
 
  </body>
  </html>
 
  <?php
 mysqli_close($conn);
-?S>
+?>
